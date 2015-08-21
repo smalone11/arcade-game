@@ -128,7 +128,8 @@ var Engine = (function(global) {
             ],
             numRows = 6,
             numCols = 5,
-            row, col;
+            row, col,
+            select = 'images/Selector.png';
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -147,6 +148,8 @@ var Engine = (function(global) {
             }
         }
 
+        //Loads in the icon to designate the starting point
+        ctx.drawImage(Resources.get(select), 202, 375);
 
         renderEntities();
     }
@@ -183,7 +186,12 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png',
+        'images/Selector.png'
     ]);
     Resources.onReady(init);
 
