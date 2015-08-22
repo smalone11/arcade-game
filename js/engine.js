@@ -29,8 +29,9 @@ var Engine = (function(global) {
     canvas.height = 606;
     doc.body.appendChild(canvas);
 
-    //Defines variable to keep track of current and high scores
-    scores = [0, 0];
+    //Defines object to keep track of current and high score
+    var scores = {current: 0,
+                  high: 0};
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -54,8 +55,8 @@ var Engine = (function(global) {
         //Adds text to display the current and high score
         textBaseline = top;
         ctx.font = "bold 12pt sans-serif";
-        ctx.fillText("Score: " + scores[0], 5, 560);
-        ctx.fillText("High: " + scores[1], 5, 580);
+        ctx.fillText("Score: " + scores.current, 5, 560);
+        ctx.fillText("High: " + scores.high, 5, 580);
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -88,9 +89,8 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt, scores) {
-      scores = updateEntities(dt, scores);
-      //checkCollisions();
-      return scores;
+        scores = updateEntities(dt, scores);
+        return scores;
     }
 
     /* This is called by the update function  and loops through all of the
@@ -104,7 +104,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        score = player.update(scores);
+        scores = player.update(scores);
         return scores;
     }
 
