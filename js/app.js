@@ -1,5 +1,6 @@
 // Enemies our player must avoid
 var Enemy = function(locX, locY, speed) {
+  'use strict';
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
 
@@ -14,11 +15,12 @@ var Enemy = function(locX, locY, speed) {
   // The image/sprite for our enemies, this uses
   // a helper we've provided to easily load images
   this.sprite = 'images/enemy-bug.png';
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
+  'use strict';
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
@@ -40,17 +42,20 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + (dt * this.speed);
     this.y = this.y + 0;
   }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+  'use strict';
+
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
+  'use strict';
   //Starting location of player
   this.x = 200;
   this.y = 380;
@@ -62,11 +67,15 @@ var Player = function() {
                 'images/char-pink-girl.png',
                 'images/char-princess-girl.png'];
   this.char = 0;
-}
+};
 
 Player.prototype.update = function(scores) {
+  'use strict';
+
+  var len = allEnemies.length;
+
   //For statement to determine if player runs into enemy
-  for (var e = 0; e < allEnemies.length; e++) {
+  for (var e = 0; e < len; e++) {
     //Checks to see if an enemy is on the same row as the player
     if (allEnemies[e].y === this.y) {
       //Checks to see if an enemy is in the same column as the player
@@ -96,16 +105,21 @@ Player.prototype.update = function(scores) {
 
     //Increases score by 1
     scores.current = scores.current + 1;
-    return scores
+    return scores;
   }
-}
+};
 
 Player.prototype.render = function() {
+  'use strict';
+  
   ctx.drawImage(Resources.get(this.sprite[this.char]), this.x, this.y);
-}
+};
 
 //Moves character based on key pressed
 Player.prototype.handleInput = function(input) {
+  'use strict';
+
+  //Checks which button is pressed and then chanegs the x or y value for the player.
   if (input === 'up') {
     if ((this.y - 80) > -21) {
       this.y = this.y - 80;
@@ -125,7 +139,7 @@ Player.prototype.handleInput = function(input) {
       this.x = this.x + 101;
     }
   }
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -133,7 +147,7 @@ Player.prototype.handleInput = function(input) {
 var allEnemies = [new Enemy(-125, 60, 100), new Enemy(-125, 140, 200), new Enemy(-300, 220, 300),
 new Enemy(-600, 60, 400), new Enemy(-600, 220, 200), new Enemy(-600, 140, 300)];
 
-var player = new Player;
+var player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
